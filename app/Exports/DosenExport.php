@@ -50,11 +50,6 @@ class DosenExport implements FromCollection, WithMapping, WithHeadings, WithStyl
             'font' => [
                 'size' => 16,
             ],
-            'borders' => [
-                'allBorders' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                ],
-            ],
             'alignment' => [
                 'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
             ],

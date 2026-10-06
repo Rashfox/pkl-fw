@@ -9,9 +9,10 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\WithTitle;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class PerakExport implements FromCollection, WithMapping, WithHeadings, WithStyles, ShouldAutoSize
+class PerakExport implements FromCollection, WithMapping, WithHeadings, WithStyles, ShouldAutoSize, WithTitle
 {
     public function collection(): Collection
     {
@@ -28,16 +29,27 @@ class PerakExport implements FromCollection, WithMapping, WithHeadings, WithStyl
     public function headings(): array
     {
         return [
-            'Kode Akademik',
+            ['Data Akademik'],
+            [],
+            ['Kode Akademik',
             'Semester',
             'Tahun',
-            'Status'
+            'Status']
         ];
     }
     public function styles(Worksheet $sheet): array
     {
         $highestRow = $sheet->getHighestRow();
-        $sheet->getStyle('A1:D' . $highestRow)->applyFromArray([
+        $sheet->mergeCells('A1:D2');
+        $sheet->getStyle('A1:D2')->applyFromArray([
+            'font' => [
+                'size' => 16,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            ],
+        ]);
+        $sheet->getStyle('A3:D' . $highestRow)->applyFromArray([
             'borders' => [
                 'allBorders' => [
                     'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -48,7 +60,11 @@ class PerakExport implements FromCollection, WithMapping, WithHeadings, WithStyl
             ],
         ]);
         
-        $sheet->getStyle('A1:D1')->getFont()->setBold(true);
+        $sheet->getStyle('A1:D3')->getFont()->setBold(true);
         return [];
+    }
+    public function title(): string
+    {
+        return 'Data Akademik';
     }
 }

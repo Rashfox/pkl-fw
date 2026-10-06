@@ -9,9 +9,10 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\WithTitle;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class MahasiswaExport implements FromCollection, WithMapping, WithHeadings, WithStyles, ShouldAutoSize
+class MahasiswaExport implements FromCollection, WithMapping, WithHeadings, WithStyles, ShouldAutoSize, WithTitle
 {
     public function collection(): Collection
     {
@@ -32,18 +33,29 @@ class MahasiswaExport implements FromCollection, WithMapping, WithHeadings, With
     public function headings(): array
     {
         return [
-            'NIM',
+            ['Data Mahasiswa'],
+            [],
+            ['NIM',
             'Nama Mahasiswa',
             'Kontak',
             'Email',
             'Jenis Kelamin',
-            'Status'
+            'Status']
         ];
     }
     public function styles(Worksheet $sheet): array
     {
         $highestRow = $sheet->getHighestRow();
-        $sheet->getStyle('A1:F' . $highestRow)->applyFromArray([
+        $sheet->mergeCells('A1:F2');
+        $sheet->getStyle('A1:F2')->applyFromArray([
+            'font' => [
+                'size' => 16,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            ],
+        ]);
+        $sheet->getStyle('A3:F' . $highestRow)->applyFromArray([
             'borders' => [
                 'allBorders' => [
                     'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -54,7 +66,11 @@ class MahasiswaExport implements FromCollection, WithMapping, WithHeadings, With
             ],
         ]);
         
-        $sheet->getStyle('A1:F1')->getFont()->setBold(true);
+        $sheet->getStyle('A1:F3')->getFont()->setBold(true);
         return [];
+    }
+    public function title ():string
+    {
+        return 'Data Mahasiswa';
     }
 }
