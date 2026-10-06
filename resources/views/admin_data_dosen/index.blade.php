@@ -173,7 +173,8 @@
       <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
-@include('script')
+@endsection
+@push('script')
  @if (session('error'))
     <script>
         $(function() {
@@ -199,4 +200,4 @@
     $(d.currentTarget).find('input[name="nik"]').val(nik);
   })
 </script>
-@endsection
+@endpush

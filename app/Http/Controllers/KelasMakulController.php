@@ -23,6 +23,7 @@ class KelasMakulController extends Controller{
                     $query->where('nik', session('username'));
                 },'prodi'])->get();
             }
+            $view = 'dosen_data_kelas_makul.index';
         } elseif (session('peran') == 'a'){
             if (!empty($request->kode_akd)){
                 $kode_akd = $request->kode_akd;  
@@ -30,13 +31,14 @@ class KelasMakulController extends Controller{
             }else{
                 $kelas = KelasMakul::with(['akademik', 'makul', 'dosen', 'prodi'])->get();
             }
+            $view = 'admin_data_kelas_makul.index';
         }
         $perak = Akademik::get();
         $makul = Makul::get();
         $prodi = Prodi::get();
         $dosen = Dosen::get();
         $hal = 'kelas';
-        return view('admin_data_kelas_makul.index', [
+        return view($view, [
             'hal' => $hal, 
             'kelas' => $kelas, 
             'perak' => $perak, 

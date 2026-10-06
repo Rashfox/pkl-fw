@@ -9,9 +9,10 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithTitle;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class DosenExport implements FromCollection, WithMapping, WithHeadings, WithStyles, ShouldAutoSize
+class DosenExport implements FromCollection, WithMapping, WithHeadings, WithStyles, ShouldAutoSize, WithTitle
 {
     public function collection(): Collection
     {
@@ -19,7 +20,6 @@ class DosenExport implements FromCollection, WithMapping, WithHeadings, WithStyl
     }
     public function map($dosen):array{
         $kelamin = ($dosen->kelamin=='l')?'Laki-laki':'Perempuan';
-        $status = ($dosen->status=='1')?'Aktif':'Tidak Aktif';
         return [
             $dosen->nik,
             $dosen->nama,
@@ -32,18 +32,34 @@ class DosenExport implements FromCollection, WithMapping, WithHeadings, WithStyl
     public function headings(): array
     {
         return [
-            'NIk',
+            ['Data Dosen'],
+            [],
+            ['NIk',
             'Nama dosen',
             'Kontak',
             'Email',
-            'Jenis Kelamin'
+            'Jenis Kelamin']
         ];
     }
 
     public function styles(Worksheet $sheet): array
     {
         $highestRow = $sheet->getHighestRow();
-        $sheet->getStyle('A1:E' . $highestRow)->applyFromArray([
+        $sheet->mergeCells('A1:E2');
+        $sheet->getStyle('A1:E2')->applyFromArray([
+            'font' => [
+                'size' => 16,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                ],
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            ],
+        ]);
+        $sheet->getStyle('A3:E' . $highestRow)->applyFromArray([
             'borders' => [
                 'allBorders' => [
                     'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -54,7 +70,11 @@ class DosenExport implements FromCollection, WithMapping, WithHeadings, WithStyl
             ],
         ]);
         
-        $sheet->getStyle('A1:E1')->getFont()->setBold(true);
+        $sheet->getStyle('A1:E3')->getFont()->setBold(true);
         return [];
+    }
+    public function title(): string
+    {
+        return 'Data Dosen';
     }
 }

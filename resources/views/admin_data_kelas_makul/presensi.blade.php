@@ -206,7 +206,8 @@
     </div>
     <!-- /.modal-dialog -->
   </div>
-@include('script')
+@endsection
+@push('scripts')
 <script>
 $(document).ready(function() {
   $('#modal-edit').on('show.bs.modal', function (event) {
@@ -232,4 +233,4 @@ $(document).ready(function() {
     }, 60000);
   }
 </script>
-@endsection
+@endpush

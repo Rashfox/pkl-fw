@@ -169,11 +169,12 @@
     </div>
     <!-- /.modal-dialog -->
   </div>
-@include('script')
+@endsection
+@push('script')
  <script>
   $('#modal-foto').on('show.bs.modal', function(m){
     var nim = $(m.relatedTarget).data('nim');
     $(m.currentTarget).find('input[name="nim"]').val(nim);
   })
 </script>
-@endsection
+@endpush

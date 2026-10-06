@@ -151,7 +151,8 @@
     </div>
     <!-- /.modal-dialog -->
   </div>
-@include('script')
+@endsection
+@push('scripts')
 <script>
     $('#modal-tambah').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget)
@@ -160,4 +161,4 @@
       modal.find('.modal-body input[name="kode_kelas"]').val(id)
     })
 </script>
-@endsection
+@endpush

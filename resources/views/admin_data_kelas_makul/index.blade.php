@@ -26,10 +26,8 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                @if (session('peran') == 'a')
                 <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-tambah"><i class="fas fa-plus"></i> Tambah Kelas</button>
                 <button href="{{ Route('impor.kelas') }}" type="button" data-toggle="modal" data-target="#modal-impor" class="btn btn-success mb-2"><i class="fa fa-file-excel"></i> Impor</button>
-                @endif
                 <table  class="table table-bordered table-striped">
                   <thead>
                   <tr>
@@ -49,9 +47,7 @@
                     @foreach ($kelas as $k)
                       <tr>
                         <td>{{ $no++ }}</td>
-                        @if (session('peran') == 'a')
                         <td>{{ $k->dosen->nama}}</td>
-                        @endif
                         <td>{{ $k->nama_kelas }}</td>
                         <td>{{ $k->makul->nama_makul }}</td>
                         <td>{{ $k->prodi->nama_prodi }}</td>
@@ -59,10 +55,8 @@
                         <td>
                           <a href="{{ Route('detail.kelas',['id' => $k->id]) }}" class="btn btn-primary btn-sm"><i class="fa fa-info-circle"></i></a>
                           <a href="{{ Route('data.pertemuan',['kode' => $k->id]) }}" class="btn btn-dark btn-sm"><i class="fa-solid fa-list"></i></a>
-                          @if (session('peran') == 'a')
                           <a href="{{ Route('edit.kelas',['id' => $k->id]) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil-alt"></i></a>
                           <a href="{{ Route('hapus.kelas',['id' => $k->id]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus data?')"><i class="fas fa-trash"></i></a>
-                          @endif
                         </td>
                       </tr>
                       @endforeach

@@ -151,7 +151,6 @@
     </div>
     <!-- /.modal-dialog -->
   </div>
-
 @endsection
 @push('script')
 <script>
