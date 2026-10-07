@@ -19,7 +19,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="asset_web/index2.html"><b>RASH</b>NET</a>
+    <b>RASH</b>NET
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -143,6 +143,22 @@
   });
 </script>
 @endif
+@error('username')
+<script>
+  $(function() {
+    var Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 4000
+    });
+    
+    Toast.fire({
+      icon: 'error',
+      title: '{{ $message }}'
+    });
+  });
+@enderror
 <?php
   if (isset($_SESSION['flash_message'])) {
     echo "<script>
@@ -152,7 +168,6 @@
     </script>";
     unset($_SESSION['flash_message']);
     }
-    
     if (session('error')) {
       echo "<script>
         $(function() {

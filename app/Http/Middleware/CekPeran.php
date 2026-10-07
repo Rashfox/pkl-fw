@@ -14,7 +14,7 @@ class CekPeran
             return redirect()->route('login');
         }
 
-        // 2. Ambil peran user saat ini (asumsi kolom di DB bernama 'peran')
+        // 2. Ambil peran user saat ini
         $userPeran = Auth::user()->peran;
 
         // 3. Jika peran user ada di dalam daftar yang diizinkan route, silakan lewat
