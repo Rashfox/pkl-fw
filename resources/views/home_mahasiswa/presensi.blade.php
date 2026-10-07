@@ -28,7 +28,7 @@
   </div>
 <!-- REQUIRED SCRIPTS -->
 @endsection
-@section('script')
+@push('script')
 <script>
 let html5QrcodeScanner;
 const url = "{{ route('postPresensi.mahasiswa') }}";
@@ -78,4 +78,4 @@ $(document).ready(function() {
   });
 });
 </script>
-@endsection
+@endpush
