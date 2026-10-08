@@ -52,7 +52,7 @@ class DashboardController extends Controller{
         $data_jumlah=[];
         foreach ($kelas as $k){
             $data_kelas[]= '['.$k->nama_kelas.'] '.$k->kode_makul;
-            $data_jumlah[] = $jml_mhs[$k->id];
+            $data_jumlah[] = $jml_mhs[$k->id]??0;
         }
         foreach ($pertemuan as $kelas){
             $total_pertemuan = $kelas->pertemuan_count;

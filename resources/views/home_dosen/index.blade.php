@@ -81,7 +81,15 @@ $(function() {
     var barChartOptions = {
       responsive              : true,
       maintainAspectRatio     : false,
-      datasetFill             : false
+      datasetFill             : false,
+      scales:{
+        yAxes: [{
+            ticks: {
+                min: 0,
+                max: {{ max($data_jumlah)+3 }}
+            }
+        }]
+      }
     }
 
     new Chart(barChartCanvas, {
