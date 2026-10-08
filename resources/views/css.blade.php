@@ -17,4 +17,5 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('asset_web/dist/css/adminlte.min.css') }}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <link rel="stylesheet" href="{{ asset('asset_web/plugins/uplot/uPlot.min.css') }}">
 </head>

@@ -152,7 +152,7 @@
     <!-- /.modal-dialog -->
   </div>
 @endsection
-@push('scripts')
+@push('script')
 <script>
     $('#modal-tambah').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget)

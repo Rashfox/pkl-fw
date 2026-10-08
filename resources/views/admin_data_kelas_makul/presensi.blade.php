@@ -207,7 +207,7 @@
     <!-- /.modal-dialog -->
   </div>
 @endsection
-@push('scripts')
+@push('script')
 <script>
 $(document).ready(function() {
   $('#modal-edit').on('show.bs.modal', function (event) {
@@ -225,7 +225,7 @@ $(document).ready(function() {
   if (data_set == 'nonaktifkan'){
     setTimeout(function(){
         window.location.reload(1);
-        const url = "{{ route('data.presensi.dosen', ['id' => $pertemuan->id_pertemuan]) }}";
+        const url = "{{ route('data.presensi', ['id' => $pertemuan->id_pertemuan]) }}";
         const response = fetch(url, {
             method: 'GET',
             cache: 'no-store'
