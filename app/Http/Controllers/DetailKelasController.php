@@ -22,7 +22,7 @@ class DetailKelasController extends Controller {
     }
 
     public function simpanDetail(Request $request){
-        $cek = DetailKelas::where('nim', $request->nim)->first();
+        $cek = DetailKelas::where('nim', $request->nim)->where('id_kelas', $request->id_kelas)->first();
         if ($cek){
             return redirect()->route('detail.kelas',['id' => $request->id_kelas])->with('error', 'Mahasiswa sudah ada!');
         }
