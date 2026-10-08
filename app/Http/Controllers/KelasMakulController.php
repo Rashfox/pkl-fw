@@ -97,15 +97,18 @@ class KelasMakulController extends Controller{
         $nama_kelas = $request->nama_kelas;
         $cek = KelasMakul::where('kode_akd', $kode_akd)
                 ->where('kode_makul', $kode_makul)
+                ->where('kode_akd', $kode_akd)
                 ->where('kode_prodi', $kode_prodi)
                 ->where('kode_dosen', $kode_dosen)
                 ->where('nama_kelas', $nama_kelas)
                 ->first();
         if (empty($cek)){
-            KelasMakul::where('kode_makul', $kode_makul)->update([
-                'nama_kelas' => $request->nama_kelas,
-                'jml_sks' => $request->jml_sks,
-                'jml_cpmk' => $request->jml_cpmk,
+            KelasMakul::where('id', $request->id)->update([
+                'nama_kelas' => $nama_kelas,
+                'kode_akd' => $kode_akd,
+                'kode_prodi' => $kode_prodi,
+                'kode_dosen' => $kode_dosen,
+                'kode_makul' => $kode_makul,
             ]);
             return redirect()->route('kelas.admin')->with('sukses', 'Data Mata Kuliah berhasil diubah!');
         }

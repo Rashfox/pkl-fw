@@ -13,6 +13,7 @@
                   @csrf
                   <div class="modal-body">
                     <div class="form-group">
+                      <input type="hidden" name="id" value="{{ $kelas->id }}">
                       <label>Nama Kelas</label>
                       <input type="text" class="form-control" name="nama_kelas" placeholder="Masukkan Nama Kelas" required value="{{ $kelas->nama_kelas }}">
                     </div>
